@@ -1,93 +1,92 @@
 
--- Screen dimensions
-WINDOW_WIDTH = 800
-WINDOW_HEIGHT = 600
+local Game = require("game")
+local Extras = require("extras")
+local Design = require("design")
 
--- Left Paddle
-player1 = {
-    x = 30,
-    y = 250,
-    width = 15,
-    height = 100,
-    speed = 300
-}
-
--- Right Paddle
-player2 = {
-    x = 755,
-    y = 250,
-    width = 15,
-    height = 100,
-    speed = 300
-}
+-- =================================
+-- Load Game
+-- =================================
 
 function love.load()
 
-    love.window.setMode(WINDOW_WIDTH, WINDOW_HEIGHT)
+    love.window.setMode(Game.WIDTH, Game.HEIGHT)
+    love.window.setTitle("Pong - Retro Futuristic Arcade")
 
-    love.window.setTitle("Pong Game")
+    Design.load()
 
 end
+
+-- =================================
+-- Update Game
+-- =================================
 
 function love.update(dt)
 
-    -- Left Paddle Movement (W / S)
-
-    if love.keyboard.isDown("w") then
-        player1.y = player1.y - player1.speed * dt
+    if Extras.state ~= "playing" then
+        return
     end
 
-    if love.keyboard.isDown("s") then
-        player1.y = player1.y + player1.speed * dt
+    -- Update Game and Handle Paddle Hits
+    local scorer = Game.update(
+        dt,
+        Extras.increaseBallSpeed
+    )
+
+    -- Handle Scoring and Winning
+    if scorer == "player1" then
+
+        if Game.player1Score >= Extras.winningScore then
+
+            Extras.finishMatch(1)
+
+        else
+
+            Game.resetBall(-1)
+
+        end
+
+    elseif scorer == "player2" then
+
+        if Game.player2Score >= Extras.winningScore then
+
+            Extras.finishMatch(2)
+
+        else
+
+            Game.resetBall(1)
+
+        end
+
     end
-
-    -- Right Paddle Movement (Up / Down)
-
-    if love.keyboard.isDown("up") then
-        player2.y = player2.y - player2.speed * dt
-    end
-
-    if love.keyboard.isDown("down") then
-        player2.y = player2.y + player2.speed * dt
-    end
-
-    -- Keep paddles inside the screen
-
-    player1.y = math.max(0, math.min(
-        player1.y,
-        WINDOW_HEIGHT - player1.height
-    ))
-
-    player2.y = math.max(0, math.min(
-        player2.y,
-        WINDOW_HEIGHT - player2.height
-    ))
 
 end
 
+-- =================================
+-- Draw Game
+-- =================================
+
 function love.draw()
 
-    -- Dark background
-    love.graphics.clear(0.05, 0.05, 0.10)
+    Design.draw(Game, Extras)
 
-    -- Draw left paddle
-    love.graphics.setColor(1, 1, 1)
+end
 
-    love.graphics.rectangle(
-        "fill",
-        player1.x,
-        player1.y,
-        player1.width,
-        player1.height
-    )
+-- =================================
+-- Keyboard Input
+-- =================================
 
-    -- Draw right paddle
-    love.graphics.rectangle(
-        "fill",
-        player2.x,
-        player2.y,
-        player2.width,
-        player2.height
-    )
+function love.keypressed(key)
+
+    Extras.keypressed(key, Game)
+
+end
+
+-- =================================
+-- Text Input
+-- =================================
+
+function love.textinput(text)
+
+    Extras.textinput(text)
 
 end
