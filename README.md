@@ -1,7 +1,6 @@
 # Pong Game – LÖVE2D
 
 **Student Name:** Nemeh K. Abu Issa  
-**Class/Section:** [Add Class and Section]
 
 ## Game Description
 
