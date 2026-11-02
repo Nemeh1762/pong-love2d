@@ -50,16 +50,14 @@ Replace `PATH_TO_LOVE` with the location where LÖVE is installed on your comput
 
 ## Own Changes & Extra Features
 
-In addition to the required game functionality, I implemented several improvements to enhance the gameplay and user experience:
-
-- **Different Paddle Colors:** Each player's paddle has a distinct color for better visual identification.
+- **Different Paddle Colors:** Each player's paddle has a distinct color.
 - **Dynamic Ball Speed:** The ball speed increases by 5% after every paddle collision, up to a maximum speed.
 - **Custom Player Names:** Players can enter their names before starting a match.
 - **Winning System:** The first player to reach 5 points wins the match.
-- **Match Wins Counter:** Tracks the number of matches won by each player during the current game session.
-- **Replay System:** Players can start a new match after a winner is announced while keeping their match win records.
+- **Match Wins Counter:** Tracks match wins during the current game session.
+- **Replay System:** Players can start a new match while keeping their match win records.
 - **Player Name Customization:** Players can enter new names after a match ends.
-- **Custom Game Design:** A retro-futuristic visual theme featuring a dark background, distinct paddle colors, a styled scoreboard, and visual effects.
+- **Custom Game Design:** A retro-futuristic visual theme.
 
 ## Screenshot
 
@@ -67,4 +65,4 @@ In addition to the required game functionality, I implemented several improvemen
 
 ## Demo Video
 
-[Watch the Pong Game Demo](demo/DEMO.mp4)
+[Watch the Pong Game Demo](https://drive.google.com/file/d/1367vqwxo1Vx2zlCo2OjdmPdChs5zbBq8/view?usp=sharing)
